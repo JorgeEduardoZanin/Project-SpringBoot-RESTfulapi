@@ -22,6 +22,9 @@ public class Usuario implements Serializable {
 	private String email;
 	private Integer idade;
 	
+	public Usuario() {
+    }
+	
 	public Usuario(String nome, String email, Integer idade) {
 		this.nome = nome;
 		this.email = email;
