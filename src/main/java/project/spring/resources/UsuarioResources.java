@@ -2,7 +2,6 @@ package project.spring.resources;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.spring.entities.Usuario;
@@ -33,21 +31,18 @@ public class UsuarioResources {
 	 *
 	 */
 	@GetMapping
-	@ResponseBody
 	public ResponseEntity<List<Usuario>> findAll(){
 		List<Usuario> listaUsuarios = services.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(listaUsuarios);
 	}
 	
 	@GetMapping(value = "/id/{id}")
-	@ResponseBody
 	public ResponseEntity<Usuario> findById(@PathVariable Long id){
 		Usuario usuario = services.findById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(usuario);
 	}
 	
 	@GetMapping(value = "/nome/{nome}")
-	@ResponseBody
 	public ResponseEntity<List<Usuario>> findAllLikeName(@PathVariable String nome){
 		List<Usuario> userList = services.findAllByLikeName(nome);
 		return ResponseEntity.status(HttpStatus.OK).body(userList);
@@ -60,7 +55,6 @@ public class UsuarioResources {
 	 *
 	 */
 	@PostMapping
-	@ResponseBody
 	public ResponseEntity<Usuario> saveUser(@RequestBody Usuario usuario){
 		usuario = services.saveUser(usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
@@ -73,7 +67,6 @@ public class UsuarioResources {
 	 *
 	 */
 	@PutMapping(value = "/{id}")
-	@ResponseBody
 	public ResponseEntity<Usuario> updateUser(@RequestBody Usuario usuario, @PathVariable Long id){
 		usuario = services.updateUser(usuario, id);
 		return ResponseEntity.status(HttpStatus.OK).body(usuario);
@@ -86,7 +79,6 @@ public class UsuarioResources {
 	 *
 	 */
 	@DeleteMapping(value = "/{id}")
-	@ResponseBody
 	public ResponseEntity<String> deleteUser(@PathVariable Long id){
 		return ResponseEntity.status(HttpStatus.OK).body(services.deleteUserById(id));
 	}
